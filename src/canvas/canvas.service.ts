@@ -1,6 +1,23 @@
 import { Injectable } from '@nestjs/common';
-// https://velog.io/@suasue/NestJS-AWS-S3-%EC%9D%B4%EB%AF%B8%EC%A7%80-%EC%97%85%EB%A1%9C%EB%93%9C
+import * as AWS from 'aws-sdk';
+
+AWS.config.update({
+  accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+  secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+  region: process.env.AWS_REGION,
+});
+
 @Injectable()
 export class CanvasService {
-  uploadImage(): {};
+  async uploadImage(req, res) {
+    const { file } = req;
+    const location = (file as any).location;
+
+    try {
+      res.status(200).json(location);
+    } catch (err) {
+      console.error(err);
+      res.status(400).json(err.message);
+    }
+  }
 }
