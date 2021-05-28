@@ -2,6 +2,7 @@ import { MiddlewareConsumer, Module, NestModule } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
+import { CanvasModule } from './canvas/canvas.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 
 @Module({
@@ -9,6 +10,7 @@ import { LoggerMiddleware } from './middlewares/logger.middleware';
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
+    CanvasModule,
   ],
   controllers: [AppController],
   providers: [AppService],
