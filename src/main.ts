@@ -18,7 +18,7 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   await app.listen(PORT);
-  console.log('server is running', `http://localhost:${PORT || 4000}`);
+  console.log('server is running', `http://localhost:${PORT || 3000}`);
 }
 
 bootstrap();
