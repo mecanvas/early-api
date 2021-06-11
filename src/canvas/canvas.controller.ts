@@ -74,7 +74,7 @@ export class CanvasController {
       }),
     }),
   )
-  async uploadImage(@Req() req, @Res() res) {
-    return this.canvasService.uploadImage(req, res);
+  async uploadImage(@Req() req) {
+    return await this.canvasService.uploadImage(req);
   }
 }
