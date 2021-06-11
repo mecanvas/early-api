@@ -1,4 +1,4 @@
-import { Controller, Post, Req, Res, UseInterceptors } from '@nestjs/common';
+import { Controller, Post, Req, UseInterceptors } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { CanvasService } from './canvas.service';
 import * as multerS3 from 'multer-s3';

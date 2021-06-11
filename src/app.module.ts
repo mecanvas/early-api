@@ -5,14 +5,28 @@ import { ConfigModule } from '@nestjs/config';
 import { CanvasModule } from './canvas/canvas.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { ormConfig } from './ormConfig';
+import { Canvas } from './entities/Canvas';
+import { CanvasFrame } from './entities/CanvasFrame';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
     }),
-    TypeOrmModule.forRoot(ormConfig),
+    TypeOrmModule.forRoot({
+      type: 'mysql',
+      host: 'localhost',
+      port: 3306,
+      username: process.env.DB_USERNAME,
+      password: process.env.DB_PASSWORD,
+      database: process.env.DB_DATABASE,
+      entities: [Canvas, CanvasFrame],
+      autoLoadEntities: true,
+      charset: 'utf8mb4',
+      synchronize: true,
+      logging: true,
+      keepConnectionAlive: true,
+    }),
     CanvasModule,
   ],
   controllers: [AppController],
