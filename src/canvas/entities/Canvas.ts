@@ -1,5 +1,6 @@
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { CanvasFrame } from './CanvasFrame';
+import { CanvasPaper } from './CanvasPaper';
 
 @Entity({ schema: 'early-api', name: 'canvas' })
 export class Canvas {
@@ -11,6 +12,9 @@ export class Canvas {
 
   @Column('varchar', { name: 'email', unique: true })
   email: string;
+
+  @OneToMany(() => CanvasPaper, (canvasPaper) => canvasPaper.Canvas)
+  CanvasPaper: CanvasPaper[];
 
   @OneToMany(() => CanvasFrame, (canvasFrame) => canvasFrame.Canvas)
   CanvasFrame: CanvasFrame[];
