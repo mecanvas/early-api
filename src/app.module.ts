@@ -18,7 +18,10 @@ import { CanvasOrder } from './canvas/entities/CanvasOrder';
       port: 3306,
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
-      database: process.env.DB_DATABASE,
+      database:
+        process.env.NODE_ENV === 'production'
+          ? process.env.DB_DATABASE
+          : process.env.DB_DEVBASE,
       entities: [CanvasOrder],
       autoLoadEntities: true,
       charset: 'utf8mb4',
