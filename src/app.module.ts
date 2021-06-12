@@ -6,7 +6,7 @@ import { CanvasModule } from './canvas/canvas.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CanvasOrder } from './canvas/entities/CanvasOrder';
-import { OrderModule } from './order/order.module';
+import { AdminModule } from './admin/admin.module';
 
 @Module({
   imports: [
@@ -31,7 +31,7 @@ import { OrderModule } from './order/order.module';
       keepConnectionAlive: true,
     }),
     CanvasModule,
-    OrderModule,
+    AdminModule,
   ],
   controllers: [AppController],
   providers: [AppService],
