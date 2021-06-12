@@ -5,8 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CanvasModule } from './canvas/canvas.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { Canvas } from './canvas/entities/Canvas';
-import { CanvasFrame } from './canvas/entities/CanvasFrame';
+import { CanvasOrder } from './canvas/entities/CanvasOrder';
 
 @Module({
   imports: [
@@ -20,7 +19,7 @@ import { CanvasFrame } from './canvas/entities/CanvasFrame';
       username: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
       database: process.env.DB_DATABASE,
-      entities: [Canvas, CanvasFrame],
+      entities: [CanvasOrder],
       autoLoadEntities: true,
       charset: 'utf8mb4',
       synchronize: true,

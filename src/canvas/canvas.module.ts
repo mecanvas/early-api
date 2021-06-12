@@ -1,13 +1,11 @@
 import { Module } from '@nestjs/common';
 import { CanvasService } from './canvas.service';
 import { CanvasController } from './canvas.controller';
-import { Canvas } from 'src/canvas/entities/Canvas';
-import { CanvasFrame } from 'src/canvas/entities/CanvasFrame';
+import { CanvasOrder } from 'src/canvas/entities/CanvasOrder';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CanvasPaper } from './entities/CanvasPaper';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Canvas, CanvasFrame, CanvasPaper])],
+  imports: [TypeOrmModule.forFeature([CanvasOrder])],
   providers: [CanvasService],
   controllers: [CanvasController],
 })
