@@ -19,6 +19,9 @@ export class CanvasOrder {
   @Column('varchar', { name: 'email' })
   email: string;
 
+  @Column('varchar', { name: 'originImgUrl' })
+  originImgUrl: string;
+
   @Column({ type: 'simple-array', name: 'paper' })
   paper: string[];
 

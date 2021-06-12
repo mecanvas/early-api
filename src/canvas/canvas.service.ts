@@ -25,7 +25,7 @@ export class CanvasService {
   }
 
   async sendToCanvas(files: any, data: CanvasSaveRequestDto) {
-    const { email, paper, username } = data;
+    const { email, paper, username, originImgUrl } = data;
 
     const dataUrl = [];
     files.forEach((file) => dataUrl.push(file.location));
@@ -34,6 +34,7 @@ export class CanvasService {
     await this.canvasOrderRepository.save({
       username,
       email,
+      originImgUrl,
       paper: paperList,
       dataUrl,
     });

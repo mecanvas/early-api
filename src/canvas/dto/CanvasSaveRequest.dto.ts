@@ -21,6 +21,14 @@ export class CanvasSaveRequestDto {
   @IsString()
   @IsNotEmpty()
   @ApiProperty({
+    example: 'https://~~!',
+    description: '원본 이미지',
+  })
+  public originImgUrl: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @ApiProperty({
     example: 'S-1호,S-2호',
     description: '액자의 종이 이름들',
   })
