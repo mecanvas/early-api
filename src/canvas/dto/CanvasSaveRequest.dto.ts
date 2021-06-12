@@ -32,5 +32,5 @@ export class CanvasSaveRequestDto {
     example: 'S-1호,S-2호',
     description: '액자의 종이 이름들',
   })
-  public paper: string;
+  public paperNames: string;
 }

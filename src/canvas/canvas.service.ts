@@ -25,18 +25,18 @@ export class CanvasService {
   }
 
   async sendToCanvas(files: any, data: CanvasSaveRequestDto) {
-    const { email, paper, username, originImgUrl } = data;
+    const { email, paperNames, username, originImgUrl } = data;
 
-    const dataUrl = [];
-    files.forEach((file) => dataUrl.push(file.location));
-    const paperList = paper.split(',');
+    const canvasFrameUrls = [];
+    files.forEach((file) => canvasFrameUrls.push(file.location));
+    const paperNameArr = paperNames.split(',');
 
     await this.canvasOrderRepository.save({
       username,
       email,
       originImgUrl,
-      paper: paperList,
-      dataUrl,
+      paperNames: paperNameArr,
+      canvasFrameUrls,
     });
 
     return '성공적으로 저장되었습니다!';

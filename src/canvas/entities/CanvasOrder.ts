@@ -23,8 +23,8 @@ export class CanvasOrder {
   originImgUrl: string;
 
   @Column({ type: 'simple-array', name: 'paper' })
-  paper: string[];
+  paperNames: string[];
 
   @Column({ type: 'simple-array', name: 'dataUrl' })
-  dataUrl: string[];
+  canvasFrameUrls: string[];
 }
