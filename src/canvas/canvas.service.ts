@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as AWS from 'aws-sdk';
-import { CanvasOrder } from 'src/canvas/entities/CanvasOrder';
+import { CanvasOrder } from 'src/canvas/entities/CanvasOrder.entities';
 import { Repository } from 'typeorm';
 import { CanvasSaveRequestDto } from './dto/CanvasSaveRequest.dto';
 

@@ -5,7 +5,7 @@ import { ConfigModule } from '@nestjs/config';
 import { CanvasModule } from './canvas/canvas.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CanvasOrder } from './canvas/entities/CanvasOrder';
+import { CanvasOrder } from './canvas/entities/CanvasOrder.entities';
 import { AdminModule } from './admin/admin.module';
 
 @Module({

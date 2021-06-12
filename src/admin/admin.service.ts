@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CanvasOrder } from 'src/canvas/entities/CanvasOrder';
+import { CanvasOrder } from 'src/canvas/entities/CanvasOrder.entities';
 import { Repository } from 'typeorm';
 
 @Injectable()
