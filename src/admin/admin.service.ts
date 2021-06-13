@@ -35,7 +35,7 @@ export class AdminOrderService {
   async getCanvasOrderDetail(id: number) {
     const results = await this.canvasOrderRepository.findOne(id);
     if (!results) {
-      throw new NotFoundException();
+      throw new NotFoundException('일치하는 주문 상세 정보가 없습니다.');
     }
     return results;
   }

@@ -1,5 +1,6 @@
 import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
 import {
+  ApiBadRequestResponse,
   ApiOperation,
   ApiParam,
   ApiQuery,
@@ -18,10 +19,12 @@ export class OrderController {
   @ApiQuery({
     name: 'page',
     example: '1',
+    required: false,
   })
   @ApiQuery({
     name: 'per_page',
     example: '10',
+    required: false,
   })
   @ApiResponse({
     status: 201,
@@ -65,8 +68,8 @@ export class OrderController {
   })
   @Get('canvasorder')
   getCanvasOrder(
-    @Query('page', ParseIntPipe) page: number,
-    @Query('per_page', ParseIntPipe) perPage: number,
+    @Query('page') page: number,
+    @Query('per_page') perPage: number,
   ) {
     return this.orderService.getCanvasOrder(page, perPage);
   }
@@ -80,6 +83,9 @@ export class OrderController {
     status: 201,
     type: CanvasOrder,
     description: '캔버스 주문 상세 내용',
+  })
+  @ApiBadRequestResponse({
+    description: '일치하는 주문 상세 정보가 없습니다.',
   })
   @Get('canvasorder/:id')
   getCanvasOrderDetail(@Param('id', ParseIntPipe) id: number) {
