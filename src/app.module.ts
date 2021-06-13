@@ -15,10 +15,19 @@ import { AdminModule } from './admin/admin.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host: 'localhost',
+      host:
+        process.env.NODE_ENV === 'production'
+          ? process.env.DB_HOSTNAME
+          : 'localhost',
       port: 3306,
-      username: process.env.DB_USERNAME,
-      password: process.env.DB_PASSWORD,
+      username:
+        process.env.NODE_ENV === 'production'
+          ? process.env.DB_USERNAME
+          : process.env.DB_DEVUSER,
+      password:
+        process.env.NODE_ENV === 'production'
+          ? process.env.DB_PASSWORD
+          : process.env.DB_DEVPASS,
       database:
         process.env.NODE_ENV === 'production'
           ? process.env.DB_DATABASE
