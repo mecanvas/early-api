@@ -35,7 +35,7 @@ import { AdminModule } from './admin/admin.module';
       entities: [CanvasOrder],
       autoLoadEntities: true,
       charset: 'utf8mb4',
-      synchronize: true,
+      synchronize: process.env.NODE_ENV !== 'production',
       logging: true,
       keepConnectionAlive: true,
     }),
