@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { CanvasOrder } from 'src/canvas/entities/CanvasOrder.entities';
 import { Repository } from 'typeorm';
@@ -10,16 +10,32 @@ export class AdminOrderService {
     private canvasOrderRepository: Repository<CanvasOrder>,
   ) {}
 
-  async getCanvasOrder(page?: number, perPage?: number) {
+  async getCanvasOrder(page: number, perPage: number) {
     const defaultPerPage = perPage || 10;
     const defaultPage = page || 1;
-    const res = await this.canvasOrderRepository
-      .createQueryBuilder()
-      .orderBy('createdAt', 'DESC')
-      .skip((defaultPage - 1) * defaultPerPage)
-      .take(defaultPerPage)
-      .getMany();
+    const results = await this.canvasOrderRepository.find({
+      select: [
+        'id',
+        'createdAt',
+        'username',
+        'email',
+        'originImgUrl',
+        'paperNames',
+      ],
+      order: { createdAt: 'DESC' },
+      skip: (defaultPage - 1) * defaultPerPage,
+      take: defaultPerPage,
+    });
 
-    return res;
+    const total = await this.canvasOrderRepository.count();
+    return { total, results };
+  }
+
+  async getCanvasOrderDetail(id: number) {
+    const results = await this.canvasOrderRepository.findOne(id);
+    if (!results) {
+      throw new NotFoundException();
+    }
+    return results;
   }
 }

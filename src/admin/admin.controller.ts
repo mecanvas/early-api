@@ -1,9 +1,15 @@
-import { Controller, Get, ParseIntPipe, Query } from '@nestjs/common';
-import { ApiOperation, ApiQuery, ApiResponse, ApiTags } from '@nestjs/swagger';
+import { Controller, Get, Param, ParseIntPipe, Query } from '@nestjs/common';
+import {
+  ApiOperation,
+  ApiParam,
+  ApiQuery,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CanvasOrder } from 'src/canvas/entities/CanvasOrder.entities';
 import { AdminOrderService } from './admin.service';
 
-@ApiTags('주문 리스트')
+@ApiTags('얼리 어드민')
 @Controller('admin')
 export class OrderController {
   constructor(private readonly orderService: AdminOrderService) {}
@@ -11,22 +17,70 @@ export class OrderController {
   @ApiOperation({ summary: '캔버스 주문 목록 가져오기' })
   @ApiQuery({
     name: 'page',
-    example: 'page=1',
+    example: '1',
   })
   @ApiQuery({
     name: 'per_page',
-    example: 'per_page=10',
+    example: '10',
   })
   @ApiResponse({
     status: 201,
-    type: CanvasOrder,
-    description: '캔버스 주문 목록',
+    schema: {
+      properties: {
+        total: {
+          type: 'number',
+        },
+
+        results: {
+          properties: {
+            id: {
+              type: 'number',
+            },
+            username: {
+              type: 'string',
+              example: '홍길동',
+            },
+            email: {
+              type: 'string',
+              example: 'sample123@gmail.com',
+            },
+            originImgUrl: {
+              type: 'string',
+              example: 's3 link',
+            },
+            paperNames: {
+              type: 'array',
+              example: '[S-1호,S-2호]',
+            },
+            createdAt: {
+              type: 'string',
+              example: '2021-06-12T07:44:38.814Z',
+            },
+          },
+        },
+      },
+    },
   })
-  @Get('order')
+  @Get('canvasorder')
   getCanvasOrder(
     @Query('page', ParseIntPipe) page: number,
     @Query('per_page', ParseIntPipe) perPage: number,
   ) {
     return this.orderService.getCanvasOrder(page, perPage);
+  }
+
+  @ApiOperation({ summary: '캔버스 주문 상세 내용 가져오기' })
+  @ApiParam({
+    name: 'id',
+    required: true,
+  })
+  @ApiResponse({
+    status: 201,
+    type: CanvasOrder,
+    description: '캔버스 주문 상세 내용',
+  })
+  @Get('canvasorder/:id')
+  getCanvasOrderDetail(@Param('id', ParseIntPipe) id: number) {
+    return this.orderService.getCanvasOrderDetail(id);
   }
 }
