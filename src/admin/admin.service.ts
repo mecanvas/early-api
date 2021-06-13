@@ -16,6 +16,7 @@ export class AdminOrderService {
     const results = await this.canvasOrderRepository.find({
       select: [
         'id',
+        'orderNo',
         'createdAt',
         'username',
         'email',

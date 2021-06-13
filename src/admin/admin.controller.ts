@@ -30,10 +30,12 @@ export class OrderController {
         total: {
           type: 'number',
         },
-
         results: {
           properties: {
             id: {
+              type: 'number',
+            },
+            orderNo: {
               type: 'number',
             },
             username: {

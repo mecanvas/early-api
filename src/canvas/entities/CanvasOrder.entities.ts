@@ -12,6 +12,10 @@ export class CanvasOrder {
   @ApiProperty()
   id: number;
 
+  @Column('bigint', { name: 'orderNo' })
+  @ApiProperty()
+  orderNo: number;
+
   @CreateDateColumn()
   @ApiProperty()
   createdAt: Date;
