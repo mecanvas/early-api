@@ -3,7 +3,13 @@ import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { CanvasService } from './canvas.service';
 import * as multerS3 from 'multer-s3';
 import * as AWS from 'aws-sdk';
-import { ApiBody, ApiConsumes, ApiResponse, ApiTags } from '@nestjs/swagger';
+import {
+  ApiBody,
+  ApiConsumes,
+  ApiForbiddenResponse,
+  ApiResponse,
+  ApiTags,
+} from '@nestjs/swagger';
 import { CanvasSaveRequestDto } from './dto/CanvasSaveRequest.dto';
 
 const s3 = new AWS.S3();
@@ -51,6 +57,7 @@ export class CanvasController {
     status: 201,
     description: '이미지 url',
   })
+  @ApiForbiddenResponse({ description: '정상적으로 업로드 되지 못했습니다..' })
   @UseInterceptors(
     FileInterceptor('image', {
       storage: multerS3({

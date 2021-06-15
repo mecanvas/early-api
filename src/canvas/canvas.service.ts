@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import * as AWS from 'aws-sdk';
 import { CanvasOrder } from 'src/canvas/entities/CanvasOrder.entities';
@@ -21,6 +21,15 @@ export class CanvasService {
   async uploadImage(req) {
     const { file } = req;
     const location = (file as any).location;
+    if (!location) {
+      throw new HttpException(
+        {
+          status: HttpStatus.FORBIDDEN,
+          error: '정상적으로 업로드 되지 못했습니다.',
+        },
+        HttpStatus.FORBIDDEN,
+      );
+    }
     return location;
   }
 
