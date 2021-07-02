@@ -1,1 +1,1 @@
-web: npm run deploy
+web: npm install && npm run build && node --max-old-space-size=4096 dist/main.js

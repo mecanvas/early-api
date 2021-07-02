@@ -29,6 +29,7 @@ export class CanvasController {
       storage: multerS3({
         s3: s3,
         bucket: 'mecanvas-assets/canvas',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: function (req, file, cb) {
           cb(null, file.originalname);
@@ -63,6 +64,7 @@ export class CanvasController {
       storage: multerS3({
         s3: s3,
         bucket: 'mecanvas-assets/upload',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: function (req, file, cb) {
           cb(null, file.originalname);
