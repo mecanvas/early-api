@@ -6,8 +6,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'early-api', name: 'canvasOrder' })
-export class CanvasOrder {
+@Entity({ schema: 'early-api', name: 'canvasSingleOrder' })
+export class CanvasSingleOrder {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   @ApiProperty()
   id: number;

@@ -1,13 +1,13 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CanvasOrder } from 'src/canvas/entities/CanvasOrder.entities';
+import { CanvasDividedOrder } from 'src/canvas/entities/CanvasDividedOrder.entities';
 import { Repository } from 'typeorm';
 
 @Injectable()
 export class AdminOrderService {
   constructor(
-    @InjectRepository(CanvasOrder)
-    private canvasOrderRepository: Repository<CanvasOrder>,
+    @InjectRepository(CanvasDividedOrder)
+    private canvasOrderRepository: Repository<CanvasDividedOrder>,
   ) {}
 
   async getCanvasOrder(page: number, perPage: number) {

@@ -7,7 +7,7 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
-import { CanvasOrder } from 'src/canvas/entities/CanvasOrder.entities';
+import { CanvasDividedOrder } from 'src/canvas/entities/CanvasDividedOrder.entities';
 import { AdminOrderService } from './admin.service';
 
 @ApiTags('얼리 어드민')
@@ -85,7 +85,7 @@ export class OrderController {
   })
   @ApiResponse({
     status: 201,
-    type: CanvasOrder,
+    type: CanvasDividedOrder,
     description: '캔버스 주문 상세 내용',
   })
   @ApiBadRequestResponse({
