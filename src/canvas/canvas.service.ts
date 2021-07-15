@@ -34,7 +34,7 @@ export class CanvasService {
   }
 
   async sendToCanvas(files: any, data: CanvasSaveRequestDto) {
-    const { email, paperNames, username, originImgUrl } = data;
+    const { phone, paperNames, username, originImgUrl, orderRoute } = data;
     function getCurrentDate() {
       const date = new Date();
       const year = date.getFullYear().toString();
@@ -62,7 +62,8 @@ export class CanvasService {
 
     await this.canvasOrderRepository.save({
       username,
-      email,
+      phone,
+      orderRoute,
       originImgUrl,
       paperNames: paperNameArr,
       canvasFrameUrls,

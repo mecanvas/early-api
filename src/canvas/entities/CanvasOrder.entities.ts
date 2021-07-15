@@ -24,9 +24,13 @@ export class CanvasOrder {
   @ApiProperty()
   username: string;
 
-  @Column('varchar', { name: 'email' })
+  @Column('int', { name: 'phone' })
   @ApiProperty()
-  email: string;
+  phone: number;
+
+  @Column('varchar', { name: 'orderRoute' })
+  @ApiProperty()
+  orderRoute: string;
 
   @Column('varchar', { name: 'originImgUrl' })
   @ApiProperty()
