@@ -39,6 +39,7 @@ export class CanvasService {
   constructor(
     @InjectRepository(CanvasDividedOrder)
     private canvasDividedOrderRepository: Repository<CanvasDividedOrder>,
+    @InjectRepository(CanvasSingleOrder)
     private canvasSingleOrderRepository: Repository<CanvasSingleOrder>,
   ) {}
 

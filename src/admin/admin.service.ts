@@ -9,6 +9,7 @@ export class AdminOrderService {
   constructor(
     @InjectRepository(CanvasDividedOrder)
     private canvasDividedOrderRepository: Repository<CanvasDividedOrder>,
+    @InjectRepository(CanvasSingleOrder)
     private canvasSingleOrderRepository: Repository<CanvasSingleOrder>,
   ) {}
 
@@ -68,7 +69,7 @@ export class AdminOrderService {
   }
 
   async getCanvasSingleOrderDetail(id: number) {
-    const results = await this.canvasDividedOrderRepository.findOne(id);
+    const results = await this.canvasSingleOrderRepository.findOne(id);
     if (!results) {
       throw new NotFoundException('일치하는 주문 상세 정보가 없습니다.');
     }
