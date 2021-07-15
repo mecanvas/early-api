@@ -4,6 +4,7 @@ import * as AWS from 'aws-sdk';
 import { CanvasDividedOrder } from 'src/canvas/entities/CanvasDividedOrder.entities';
 import { Repository } from 'typeorm';
 import { CanvasSaveRequestDto } from './dto/CanvasSaveRequest.dto';
+import { CanvasSingleOrder } from './entities/CanvasSingleOrder.entities';
 
 function getCurrentDate() {
   const date = new Date();
@@ -38,6 +39,7 @@ export class CanvasService {
   constructor(
     @InjectRepository(CanvasDividedOrder)
     private canvasDividedOrderRepository: Repository<CanvasDividedOrder>,
+    private canvasSingleOrderRepository: Repository<CanvasSingleOrder>,
   ) {}
 
   async uploadImage(req) {
@@ -80,7 +82,7 @@ export class CanvasService {
     const canvasFrameUrls = files.location;
     const paperNameArr = paperNames.split(',');
 
-    await this.canvasDividedOrderRepository.save({
+    await this.canvasSingleOrderRepository.save({
       username,
       phone,
       orderRoute,
