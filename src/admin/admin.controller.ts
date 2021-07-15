@@ -45,9 +45,13 @@ export class OrderController {
               type: 'string',
               example: '홍길동',
             },
-            email: {
+            phone: {
+              type: 'number',
+              example: '01026299315',
+            },
+            orderRoute: {
               type: 'string',
-              example: 'sample123@gmail.com',
+              example: '네이버',
             },
             originImgUrl: {
               type: 'string',
