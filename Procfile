@@ -1,1 +1,1 @@
-web: npm install && npm run build && node --max-old-space-size=4096 dist/main.js
+web: npm install && npm run build && node dist/main.js
