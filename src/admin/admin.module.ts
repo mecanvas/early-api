@@ -2,10 +2,11 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AdminOrderService } from './admin.service';
 import { OrderController } from './admin.controller';
-import { CanvasOrder } from 'src/canvas/entities/CanvasOrder.entities';
+import { CanvasDividedOrder } from 'src/canvas/entities/CanvasDividedOrder.entities';
+import { CanvasSingleOrder } from 'src/canvas/entities/CanvasSingleOrder.entities';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([CanvasOrder])],
+  imports: [TypeOrmModule.forFeature([CanvasDividedOrder, CanvasSingleOrder])],
   providers: [AdminOrderService],
   controllers: [OrderController],
 })

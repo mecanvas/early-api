@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
+import { IsNumber, IsNotEmpty, IsString } from 'class-validator';
 
 export class CanvasSaveRequestDto {
   @IsString()
@@ -10,13 +10,29 @@ export class CanvasSaveRequestDto {
   })
   public username: string;
 
-  @IsEmail()
+  @IsString()
   @IsNotEmpty()
   @ApiProperty({
-    example: 'sample123@gmail.com',
-    description: '이메일',
+    example: '01026299315',
+    description: '핸드폰번호',
   })
-  public email: string;
+  public phone: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: '1 = 캔버스 2= 포스터',
+    description: '타입 번호',
+  })
+  public type: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: '1 = 쿠팡, 2= 네이버, 3= 아이디어스',
+    description: '주문 경로',
+  })
+  public orderRoute: number;
 
   @IsString()
   @IsNotEmpty()

@@ -6,8 +6,8 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'early-api', name: 'canvasOrder' })
-export class CanvasOrder {
+@Entity({ schema: 'early-api', name: 'canvasSingleOrder' })
+export class CanvasSingleOrder {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   @ApiProperty()
   id: number;
@@ -15,6 +15,10 @@ export class CanvasOrder {
   @Column('bigint', { name: 'orderNo' })
   @ApiProperty()
   orderNo: number;
+
+  @Column('int', { name: 'type' })
+  @ApiProperty()
+  type: number;
 
   @CreateDateColumn()
   @ApiProperty()
@@ -24,11 +28,15 @@ export class CanvasOrder {
   @ApiProperty()
   username: string;
 
-  @Column('varchar', { name: 'email' })
+  @Column('varchar', { name: 'phone' })
   @ApiProperty()
-  email: string;
+  phone: string;
 
-  @Column('varchar', { name: 'originImgUrl' })
+  @Column('int', { name: 'orderRoute' })
+  @ApiProperty()
+  orderRoute: number;
+
+  @Column('mediumtext', { name: 'originImgUrl' })
   @ApiProperty()
   originImgUrl: string;
 

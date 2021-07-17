@@ -19,6 +19,7 @@ const s3 = new AWS.S3();
 export class CanvasController {
   constructor(private readonly canvasService: CanvasService) {}
 
+  // 분할 툴
   @ApiConsumes('multipart/form-data')
   @ApiResponse({
     status: 201,
@@ -28,7 +29,7 @@ export class CanvasController {
     FilesInterceptor('image', 100, {
       storage: multerS3({
         s3: s3,
-        bucket: 'mecanvas-assets/canvas',
+        bucket: 'early-canvas/divided/save',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: function (req, file, cb) {
@@ -37,9 +38,9 @@ export class CanvasController {
       }),
     }),
   )
-  @Post()
-  async sendToCanvas(@Req() req, @Body() data: CanvasSaveRequestDto) {
-    return await this.canvasService.sendToCanvas(req.files, data);
+  @Post('divided/save')
+  async sendToDividedCanvas(@Req() req, @Body() data: CanvasSaveRequestDto) {
+    return await this.canvasService.sendToDividedCanvas(req.files, data);
   }
 
   @ApiConsumes('multipart/form-data')
@@ -63,7 +64,7 @@ export class CanvasController {
     FileInterceptor('image', {
       storage: multerS3({
         s3: s3,
-        bucket: 'mecanvas-assets/upload',
+        bucket: 'early-canvas/divided/upload',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: function (req, file, cb) {
@@ -72,8 +73,68 @@ export class CanvasController {
       }),
     }),
   )
-  @Post('img')
-  async uploadImage(@Req() req) {
+  @Post('divided/upload')
+  async uploadDividedImage(@Req() req) {
+    return await this.canvasService.uploadImage(req);
+  }
+
+  // 싱글 툴
+
+  @ApiConsumes('multipart/form-data')
+  @ApiResponse({
+    status: 201,
+    description: '성공적으로 저장되었습니다.',
+  })
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: multerS3({
+        s3: s3,
+        bucket: 'early-canvas/single/save',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        acl: 'public-read',
+        key: function (req, file, cb) {
+          cb(null, file.originalname);
+        },
+      }),
+    }),
+  )
+  @Post('single/save')
+  async sendToSingleCanvas(@Req() req, @Body() data: CanvasSaveRequestDto) {
+    return await this.canvasService.sendToSingleCanvas(req.file, data);
+  }
+
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        file: {
+          type: 'string',
+          format: 'binary',
+        },
+      },
+    },
+  })
+  @ApiResponse({
+    status: 201,
+    description: '이미지 url',
+  })
+  @ApiForbiddenResponse({ description: '정상적으로 업로드 되지 못했습니다..' })
+  @UseInterceptors(
+    FileInterceptor('image', {
+      storage: multerS3({
+        s3: s3,
+        bucket: 'early-canvas/single/upload',
+        contentType: multerS3.AUTO_CONTENT_TYPE,
+        acl: 'public-read',
+        key: function (req, file, cb) {
+          cb(null, file.originalname);
+        },
+      }),
+    }),
+  )
+  @Post('single/upload')
+  async uploadSingleImage(@Req() req) {
     return await this.canvasService.uploadImage(req);
   }
 }

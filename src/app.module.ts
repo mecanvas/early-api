@@ -5,7 +5,8 @@ import { ConfigModule } from '@nestjs/config';
 import { CanvasModule } from './canvas/canvas.module';
 import { LoggerMiddleware } from './middlewares/logger.middleware';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { CanvasOrder } from './canvas/entities/CanvasOrder.entities';
+import { CanvasDividedOrder } from './canvas/entities/CanvasDividedOrder.entities';
+import { CanvasSingleOrder } from './canvas/entities/CanvasSingleOrder.entities';
 import { AdminModule } from './admin/admin.module';
 
 @Module({
@@ -32,7 +33,7 @@ import { AdminModule } from './admin/admin.module';
         process.env.NODE_ENV === 'production'
           ? process.env.DB_DATABASE
           : process.env.DB_DEVBASE,
-      entities: [CanvasOrder],
+      entities: [CanvasDividedOrder, CanvasSingleOrder],
       autoLoadEntities: true,
       charset: 'utf8mb4',
       synchronize: process.env.NODE_ENV !== 'production',
