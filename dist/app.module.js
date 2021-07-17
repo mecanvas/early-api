@@ -31,17 +31,17 @@ AppModule = __decorate([
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
                 host: process.env.NODE_ENV === 'production'
-                    ? process.env.DB_HOSTNAME
+                    ? process.env.RDS_HOSTNAME
                     : 'localhost',
-                port: 3306,
+                port: process.env.NODE_ENV === 'production' ? +process.env.RDS_PORT : 3306,
                 username: process.env.NODE_ENV === 'production'
-                    ? process.env.DB_USERNAME
+                    ? process.env.RDS_USERNAME
                     : process.env.DB_DEVUSER,
                 password: process.env.NODE_ENV === 'production'
-                    ? process.env.DB_PASSWORD
+                    ? process.env.RDS_PASSWORD
                     : process.env.DB_DEVPASS,
                 database: process.env.NODE_ENV === 'production'
-                    ? process.env.DB_DATABASE
+                    ? process.env.RDS_DB_NAME
                     : process.env.DB_DEVBASE,
                 entities: [CanvasDividedOrder_entities_1.CanvasDividedOrder, CanvasSingleOrder_entities_1.CanvasSingleOrder],
                 autoLoadEntities: process.env.NODE_ENV !== 'production',
