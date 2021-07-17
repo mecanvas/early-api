@@ -17,8 +17,7 @@ import { AdminModule } from './admin/admin.module';
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.RDS_HOSTNAME,
-      port:
-        process.env.NODE_ENV === 'production' ? +process.env.RDS_PORT : 3306,
+      port: 3306,
       username: process.env.RDS_USERNAME,
       password: process.env.RDS_PASSWORD,
       database: process.env.RDS_DB_NAME,
