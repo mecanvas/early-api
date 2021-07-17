@@ -32,9 +32,9 @@ export class CanvasSingleOrder {
   @ApiProperty()
   phone: string;
 
-  @Column('varchar', { name: 'orderRoute' })
+  @Column('int', { name: 'orderRoute' })
   @ApiProperty()
-  orderRoute: string;
+  orderRoute: number;
 
   @Column('mediumtext', { name: 'originImgUrl' })
   @ApiProperty()

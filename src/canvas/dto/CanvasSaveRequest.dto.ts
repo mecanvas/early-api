@@ -21,18 +21,18 @@ export class CanvasSaveRequestDto {
   @IsNumber()
   @IsNotEmpty()
   @ApiProperty({
-    example: 1, // 1 = 캔버스 2= 포스터
+    example: '1 = 캔버스 2= 포스터',
     description: '타입 번호',
   })
   public type: number;
 
-  @IsString()
+  @IsNumber()
   @IsNotEmpty()
   @ApiProperty({
-    example: '네이버',
+    example: '1 = 쿠팡, 2= 네이버, 3= 아이디어스',
     description: '주문 경로',
   })
-  public orderRoute: string;
+  public orderRoute: number;
 
   @IsString()
   @IsNotEmpty()
