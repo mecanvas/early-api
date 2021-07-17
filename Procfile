@@ -1,1 +1,1 @@
-web: npm install && node dist/main.js
+web: npm install && NODE_ENV=production node dist/main.js
