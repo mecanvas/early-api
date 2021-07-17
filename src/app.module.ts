@@ -34,11 +34,11 @@ import { AdminModule } from './admin/admin.module';
           ? process.env.DB_DATABASE
           : process.env.DB_DEVBASE,
       entities: [CanvasDividedOrder, CanvasSingleOrder],
-      autoLoadEntities: true,
+      autoLoadEntities: process.env.NODE_ENV !== 'production',
       charset: 'utf8mb4',
       synchronize: process.env.NODE_ENV !== 'production',
       logging: true,
-      keepConnectionAlive: true,
+      keepConnectionAlive: process.env.NODE_ENV !== 'production',
     }),
     CanvasModule,
     AdminModule,

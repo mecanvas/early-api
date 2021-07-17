@@ -44,11 +44,11 @@ AppModule = __decorate([
                     ? process.env.DB_DATABASE
                     : process.env.DB_DEVBASE,
                 entities: [CanvasDividedOrder_entities_1.CanvasDividedOrder, CanvasSingleOrder_entities_1.CanvasSingleOrder],
-                autoLoadEntities: true,
+                autoLoadEntities: process.env.NODE_ENV !== 'production',
                 charset: 'utf8mb4',
                 synchronize: process.env.NODE_ENV !== 'production',
                 logging: true,
-                keepConnectionAlive: true,
+                keepConnectionAlive: process.env.NODE_ENV !== 'production',
             }),
             canvas_module_1.CanvasModule,
             admin_module_1.AdminModule,
