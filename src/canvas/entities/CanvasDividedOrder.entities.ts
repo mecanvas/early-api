@@ -16,6 +16,10 @@ export class CanvasDividedOrder {
   @ApiProperty()
   orderNo: number;
 
+  @Column('int', { name: 'type' })
+  @ApiProperty()
+  type: number;
+
   @CreateDateColumn()
   @ApiProperty()
   createdAt: Date;
@@ -24,15 +28,15 @@ export class CanvasDividedOrder {
   @ApiProperty()
   username: string;
 
-  @Column('int', { name: 'phone' })
+  @Column('varchar', { name: 'phone' })
   @ApiProperty()
-  phone: number;
+  phone: string;
 
   @Column('varchar', { name: 'orderRoute' })
   @ApiProperty()
   orderRoute: string;
 
-  @Column('varchar', { name: 'originImgUrl' })
+  @Column('mediumtext', { name: 'originImgUrl' })
   @ApiProperty()
   originImgUrl: string;
 

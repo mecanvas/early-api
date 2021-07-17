@@ -29,7 +29,7 @@ export class CanvasController {
     FilesInterceptor('image', 100, {
       storage: multerS3({
         s3: s3,
-        bucket: 'canvas/divided/save',
+        bucket: 'early-canvas/divided/save',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: function (req, file, cb) {
@@ -64,7 +64,7 @@ export class CanvasController {
     FileInterceptor('image', {
       storage: multerS3({
         s3: s3,
-        bucket: 'canvas/divided/upload',
+        bucket: 'early-canvas/divided/upload',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: function (req, file, cb) {
@@ -89,7 +89,7 @@ export class CanvasController {
     FileInterceptor('image', {
       storage: multerS3({
         s3: s3,
-        bucket: 'canvas/single/save',
+        bucket: 'early-canvas/single/save',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: function (req, file, cb) {
@@ -124,7 +124,7 @@ export class CanvasController {
     FileInterceptor('image', {
       storage: multerS3({
         s3: s3,
-        bucket: 'canvas/single/upload',
+        bucket: 'early-canvas/single/upload',
         contentType: multerS3.AUTO_CONTENT_TYPE,
         acl: 'public-read',
         key: function (req, file, cb) {

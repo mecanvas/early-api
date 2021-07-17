@@ -70,7 +70,7 @@ export class OrderController {
       },
     },
   })
-  @Get('canvas/divided')
+  @Get('order/divided')
   getCanvasDividedOrder(
     @Query('page') page: number,
     @Query('per_page') perPage: number,
@@ -91,7 +91,7 @@ export class OrderController {
   @ApiBadRequestResponse({
     description: '일치하는 주문 상세 정보가 없습니다.',
   })
-  @Get('canvas/divided/:id')
+  @Get('order/divided/:id')
   getCanvasDividedOrderDetail(@Param('id', ParseIntPipe) id: number) {
     return this.orderService.getCanvasDividedOrderDetail(id);
   }
@@ -127,7 +127,7 @@ export class OrderController {
               example: '홍길동',
             },
             phone: {
-              type: 'number',
+              type: 'string',
               example: '01026299315',
             },
             orderRoute: {
@@ -151,7 +151,7 @@ export class OrderController {
       },
     },
   })
-  @Get('canvas/single')
+  @Get('order/single')
   getCanvasSingleOrder(
     @Query('page') page: number,
     @Query('per_page') perPage: number,
@@ -172,7 +172,7 @@ export class OrderController {
   @ApiBadRequestResponse({
     description: '일치하는 주문 상세 정보가 없습니다.',
   })
-  @Get('canvas/single/:id')
+  @Get('order/single/:id')
   getCanvasSingleOrderDetail(@Param('id', ParseIntPipe) id: number) {
     return this.orderService.getCanvasSingleOrderDetail(id);
   }

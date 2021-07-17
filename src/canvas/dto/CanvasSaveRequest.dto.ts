@@ -10,13 +10,21 @@ export class CanvasSaveRequestDto {
   })
   public username: string;
 
-  @IsNumber()
+  @IsString()
   @IsNotEmpty()
   @ApiProperty({
     example: '01026299315',
     description: '핸드폰번호',
   })
-  public phone: number;
+  public phone: string;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @ApiProperty({
+    example: 1, // 1 = 캔버스 2= 포스터
+    description: '타입 번호',
+  })
+  public type: number;
 
   @IsString()
   @IsNotEmpty()

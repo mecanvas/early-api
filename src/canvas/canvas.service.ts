@@ -59,7 +59,8 @@ export class CanvasService {
   }
 
   async sendToDividedCanvas(files: any, data: CanvasSaveRequestDto) {
-    const { phone, paperNames, username, originImgUrl, orderRoute } = data;
+    const { phone, paperNames, username, originImgUrl, orderRoute, type } =
+      data;
     const canvasFrameUrls = [];
     files.forEach((file) => canvasFrameUrls.push(file.location));
     const paperNameArr = paperNames.split(',');
@@ -67,6 +68,7 @@ export class CanvasService {
     await this.canvasDividedOrderRepository.save({
       username,
       phone,
+      type: +type,
       orderRoute,
       originImgUrl,
       paperNames: paperNameArr,
@@ -78,14 +80,15 @@ export class CanvasService {
   }
 
   async sendToSingleCanvas(files: any, data: CanvasSaveRequestDto) {
-    const { phone, paperNames, username, originImgUrl, orderRoute } = data;
-
+    const { phone, paperNames, username, originImgUrl, orderRoute, type } =
+      data;
     const canvasFrameUrls = files.location;
     const paperNameArr = paperNames.split(',');
 
     await this.canvasSingleOrderRepository.save({
       username,
       phone,
+      type: +type,
       orderRoute,
       originImgUrl,
       paperNames: paperNameArr,
