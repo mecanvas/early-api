@@ -12,9 +12,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate deployment package
+        run: mkdir dev
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r deploy.zip dev
+          args: zip -qq -r dev/deploy.zip ./
 
       - uses: jakejarvis/s3-sync-action@master
         with:
