@@ -28,10 +28,12 @@ jobs:
           SOURCE_DIR: ./dev
 
       - name: Deploy to EB
-        uses: hmanzur/actions-aws-eb@v1.0.0
+        uses: einaregilsson/beanstalk-deploy@v16
         with:
-          command: 'eb init early21 --keyname "Early21-env" --platform "Node.js 14" --region "ap-northeast-2" eb deploy Early21-env'
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: 'ap-northeast-2'
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          version_label: deploy
+          application_name: early21
+          environment_name: Early21-env
+          region: ap-northeast-2
+          deployment_package: dev/deploy.zip
