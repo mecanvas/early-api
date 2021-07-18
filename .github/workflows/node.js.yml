@@ -10,9 +10,9 @@ jobs:
     steps:
       - name: Checkout source code
         uses: actions/checkout@v2
-
-      - name: Generate deployment package
+      - name: create Dev folder
         run: mkdir dev
+      - name: Generate deployment package
         uses: montudor/action-zip@v1
         with:
           args: zip -qq -r dev/deploy.zip ./
