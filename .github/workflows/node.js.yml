@@ -12,7 +12,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Generate deployment package
-        run: zip -r dev/deploy.zip . -x '*.git*'
+        run: zip dev/deploy.zip -r ./ -x "*.git/*"
 
       - uses: jakejarvis/s3-sync-action@master
         with:
