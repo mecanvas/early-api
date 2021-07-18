@@ -32,4 +32,3 @@ jobs:
           application_name: early21
           environment_name: Early21-env
           region: ap-northeast-2
-          deployment_package: deploy.zip
