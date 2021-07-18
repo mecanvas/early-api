@@ -26,7 +26,7 @@ import { AdminModule } from './admin/admin.module';
       charset: 'utf8mb4',
       synchronize: true,
       logging: true,
-      keepConnectionAlive: process.env.NODE_ENV !== 'production',
+      keepConnectionAlive: true,
     }),
     CanvasModule,
     AdminModule,
