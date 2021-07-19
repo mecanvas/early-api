@@ -47,7 +47,9 @@ __decorate([
     common_1.UseInterceptors(platform_express_1.FilesInterceptor('image', 100, {
         storage: multerS3({
             s3: s3,
-            bucket: 'early-canvas/divided/save',
+            bucket: process.env.NODE_ENV === 'production'
+                ? 'early-canvas/divided/save'
+                : 'early-dev',
             contentType: multerS3.AUTO_CONTENT_TYPE,
             acl: 'public-read',
             key: function (req, file, cb) {
@@ -82,7 +84,9 @@ __decorate([
     common_1.UseInterceptors(platform_express_1.FileInterceptor('image', {
         storage: multerS3({
             s3: s3,
-            bucket: 'early-canvas/divided/upload',
+            bucket: process.env.NODE_ENV === 'production'
+                ? 'early-canvas/divided/upload'
+                : 'early-dev',
             contentType: multerS3.AUTO_CONTENT_TYPE,
             acl: 'public-read',
             key: function (req, file, cb) {
@@ -105,7 +109,9 @@ __decorate([
     common_1.UseInterceptors(platform_express_1.FileInterceptor('image', {
         storage: multerS3({
             s3: s3,
-            bucket: 'early-canvas/single/save',
+            bucket: process.env.NODE_ENV === 'production'
+                ? 'early-canvas/single/save'
+                : 'early-dev',
             contentType: multerS3.AUTO_CONTENT_TYPE,
             acl: 'public-read',
             key: function (req, file, cb) {
@@ -140,7 +146,9 @@ __decorate([
     common_1.UseInterceptors(platform_express_1.FileInterceptor('image', {
         storage: multerS3({
             s3: s3,
-            bucket: 'early-canvas/single/upload',
+            bucket: process.env.NODE_ENV === 'production'
+                ? 'early-canvas/single/upload'
+                : 'early-dev',
             contentType: multerS3.AUTO_CONTENT_TYPE,
             acl: 'public-read',
             key: function (req, file, cb) {
