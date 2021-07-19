@@ -32,7 +32,7 @@ jobs:
         with:
           aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          version_label: deploy
+          version_label: deploy-2
           application_name: early21
           environment_name: Early21-env
           region: ap-northeast-2
