@@ -15,7 +15,7 @@ jobs:
       - name: Generate deployment package
         uses: montudor/action-zip@v1
         with:
-          args: zip -qq -r dev/2021199KJD-deploy (1).zip ./
+          args: zip -qq -r dev/2021202ZDg-2021199KJD-deploy.zip ./
 
       - uses: jakejarvis/s3-sync-action@master
         with:
@@ -36,5 +36,5 @@ jobs:
           application_name: early21
           environment_name: Early21-env
           region: ap-northeast-2
-          deployment_package: dev/2021199KJD-deploy (1).zip
+          deployment_package: dev/2021202ZDg-2021199KJD-deploy.zip
           use_existing_version_if_available: true
