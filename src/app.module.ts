@@ -16,27 +16,15 @@ import { AdminModule } from './admin/admin.module';
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
-      host:
-        process.env.NODE_ENV === 'production'
-          ? process.env.DB_HOSTNAME
-          : 'localhost',
+      host: process.env.RDS_HOSTNAME,
       port: 3306,
-      username:
-        process.env.NODE_ENV === 'production'
-          ? process.env.DB_USERNAME
-          : process.env.DB_DEVUSER,
-      password:
-        process.env.NODE_ENV === 'production'
-          ? process.env.DB_PASSWORD
-          : process.env.DB_DEVPASS,
-      database:
-        process.env.NODE_ENV === 'production'
-          ? process.env.DB_DATABASE
-          : process.env.DB_DEVBASE,
+      username: process.env.RDS_USERNAME,
+      password: process.env.RDS_PASSWORD,
+      database: process.env.RDS_DB_NAME,
       entities: [CanvasDividedOrder, CanvasSingleOrder],
       autoLoadEntities: true,
       charset: 'utf8mb4',
-      synchronize: process.env.NODE_ENV !== 'production',
+      synchronize: true,
       logging: true,
       keepConnectionAlive: true,
     }),

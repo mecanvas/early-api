@@ -1,5 +1,4 @@
 # compiled output
-/dist
 /node_modules
 
 # Logs
@@ -37,4 +36,4 @@ early
 .env
 
 # EC2
-early.pem
+early21.pem
