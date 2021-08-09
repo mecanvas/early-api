@@ -8,6 +8,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CanvasDividedOrder } from './canvas/entities/CanvasDividedOrder.entities';
 import { CanvasSingleOrder } from './canvas/entities/CanvasSingleOrder.entities';
 import { AdminModule } from './admin/admin.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -30,6 +31,7 @@ import { AdminModule } from './admin/admin.module';
     }),
     CanvasModule,
     AdminModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

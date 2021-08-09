@@ -17,6 +17,7 @@ const typeorm_1 = require("@nestjs/typeorm");
 const CanvasDividedOrder_entities_1 = require("./canvas/entities/CanvasDividedOrder.entities");
 const CanvasSingleOrder_entities_1 = require("./canvas/entities/CanvasSingleOrder.entities");
 const admin_module_1 = require("./admin/admin.module");
+const user_module_1 = require("./user/user.module");
 let AppModule = class AppModule {
     configure(consumer) {
         consumer.apply(logger_middleware_1.LoggerMiddleware).forRoutes('*');
@@ -44,6 +45,7 @@ AppModule = __decorate([
             }),
             canvas_module_1.CanvasModule,
             admin_module_1.AdminModule,
+            user_module_1.UserModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
