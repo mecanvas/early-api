@@ -9,8 +9,7 @@ RDS_HOSTNAME=
 RDS_USERNAME=
 RDS_PASSWORD=
 RDS_DB_NAME=
-```
 
 <!-- FOR JWT -->
-
 JWT_KEY=
+```
