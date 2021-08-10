@@ -28,7 +28,7 @@ const options = (login) => {
     const option = {
         maxAge: login ? 1000 * 60 * 60 * 24 * 7 : 0,
         path: '/',
-        domain: isProd ? constants_1.COOKIE_URL : undefined,
+        domain: isProd ? constants_1.COOKIE_URL : 'localhost',
         httpOnly: isProd,
         secure: isProd,
         sameSite: isProd ? 'none' : 'lax',
@@ -43,7 +43,7 @@ let UserController = class UserController {
     async login(req, res) {
         const token = await this.authService.login(req.user);
         await res.cookie('early_auth', token, options(true));
-        return req.user;
+        return res.status(200).send(req.user);
     }
     getMe(req) {
         return req.user;
@@ -71,7 +71,7 @@ __decorate([
     swagger_1.ApiBody({ type: UserSignInDto_1.UserSignInDto }),
     swagger_1.ApiOperation({ summary: '유저 로그인' }),
     swagger_1.ApiResponse({
-        status: 201,
+        status: 200,
         description: 'early_auth 이름의 쿠키 제공',
     }),
     common_1.UseGuards(local_auth_guard_1.LocalAuthGuard),

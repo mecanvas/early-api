@@ -14,7 +14,8 @@ async function bootstrap() {
     .setVersion('1.0')
     .build();
 
-  const app = await NestFactory.create(AppModule, { cors: true });
+  const app = await NestFactory.create(AppModule);
+  app.enableCors({ origin: true, credentials: true });
   app.useGlobalFilters(new HttpExceptionFilter());
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

@@ -34,7 +34,7 @@ const options = (login: boolean) => {
     // 7일
     maxAge: login ? 1000 * 60 * 60 * 24 * 7 : 0,
     path: '/',
-    domain: isProd ? COOKIE_URL : undefined,
+    domain: isProd ? COOKIE_URL : 'localhost',
     httpOnly: isProd,
     secure: isProd,
     sameSite: isProd ? 'none' : 'lax',
@@ -54,7 +54,7 @@ export class UserController {
   @ApiBody({ type: UserSignInDto })
   @ApiOperation({ summary: '유저 로그인' })
   @ApiResponse({
-    status: 201,
+    status: 200,
     description: 'early_auth 이름의 쿠키 제공',
   })
   @UseGuards(LocalAuthGuard)
@@ -62,7 +62,7 @@ export class UserController {
   async login(@Request() req, @Res() res) {
     const token = await this.authService.login(req.user);
     await res.cookie('early_auth', token, options(true));
-    return req.user;
+    return res.status(200).send(req.user);
   }
 
   @ApiCookieAuth('early_auth')
