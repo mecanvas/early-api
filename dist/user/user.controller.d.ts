@@ -8,4 +8,5 @@ export declare class UserController {
     login(req: any, res: any): Promise<any>;
     getMe(req: any): any;
     register(data: UserSignUpDto): Promise<string>;
+    logout(res: any): Promise<any>;
 }

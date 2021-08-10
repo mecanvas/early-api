@@ -18,10 +18,23 @@ const swagger_1 = require("@nestjs/swagger");
 const auth_service_1 = require("../auth/auth.service");
 const jwt_auth_guard_1 = require("../auth/jwt.auth.guard");
 const local_auth_guard_1 = require("../auth/local.auth.guard");
+const constants_1 = require("../constants");
 const UserSignInDto_1 = require("./dto/UserSignInDto");
 const UserSingUpDto_1 = require("./dto/UserSingUpDto");
 const User_entities_1 = require("./entities/User.entities");
 const user_service_1 = require("./user.service");
+const isProd = process.env.NODE_ENV === 'production';
+const options = (login) => {
+    const option = {
+        maxAge: login ? 1000 * 60 * 60 * 24 * 7 : 0,
+        path: '/',
+        domain: isProd ? constants_1.COOKIE_URL : undefined,
+        httpOnly: isProd,
+        secure: isProd,
+        sameSite: isProd ? 'none' : 'lax',
+    };
+    return option;
+};
 let UserController = class UserController {
     constructor(authService, userService) {
         this.authService = authService;
@@ -29,7 +42,7 @@ let UserController = class UserController {
     }
     async login(req, res) {
         const token = await this.authService.login(req.user);
-        await res.cookie('early_auth', token);
+        await res.cookie('early_auth', token, options(true));
         return req.user;
     }
     getMe(req) {
@@ -47,6 +60,10 @@ let UserController = class UserController {
         else {
             throw new common_1.ForbiddenException();
         }
+    }
+    async logout(res) {
+        res.clearCookie('early_auth', options(false));
+        return res.send('ok');
     }
 };
 __decorate([
@@ -93,6 +110,17 @@ __decorate([
     __metadata("design:paramtypes", [UserSingUpDto_1.UserSignUpDto]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "register", null);
+__decorate([
+    swagger_1.ApiOperation({ summary: '유저 로그아웃' }),
+    swagger_1.ApiResponse({
+        status: 201,
+    }),
+    common_1.Post('logout'),
+    __param(0, common_1.Response()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "logout", null);
 UserController = __decorate([
     swagger_1.ApiTags('유저 관련'),
     common_1.Controller('auth'),

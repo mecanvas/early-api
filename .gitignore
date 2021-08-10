@@ -39,4 +39,5 @@ early
 early21.pem
 
 # 임시
+dist/*
 dist/

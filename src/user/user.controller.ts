@@ -5,6 +5,7 @@ import {
   UseGuards,
   Get,
   Res,
+  Response,
   Body,
   ForbiddenException,
 } from '@nestjs/common';
@@ -15,13 +16,31 @@ import {
   ApiResponse,
   ApiTags,
 } from '@nestjs/swagger';
+import { CookieOptions } from 'express';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
 import { LocalAuthGuard } from 'src/auth/local.auth.guard';
+import { COOKIE_URL } from 'src/constants';
 import { UserSignInDto } from './dto/UserSignInDto';
 import { UserSignUpDto } from './dto/UserSingUpDto';
 import { User } from './entities/User.entities';
 import { UserService } from './user.service';
+
+const isProd = process.env.NODE_ENV === 'production';
+
+// true면 7일 유지할 수 있게.  false면 파괴
+const options = (login: boolean) => {
+  const option: CookieOptions = {
+    // 7일
+    maxAge: login ? 1000 * 60 * 60 * 24 * 7 : 0,
+    path: '/',
+    domain: isProd ? COOKIE_URL : undefined,
+    httpOnly: isProd,
+    secure: isProd,
+    sameSite: isProd ? 'none' : 'lax',
+  };
+  return option;
+};
 
 @ApiTags('유저 관련')
 @Controller('auth')
@@ -42,7 +61,7 @@ export class UserController {
   @Post('login')
   async login(@Request() req, @Res() res) {
     const token = await this.authService.login(req.user);
-    await res.cookie('early_auth', token);
+    await res.cookie('early_auth', token, options(true));
     return req.user;
   }
 
@@ -81,5 +100,15 @@ export class UserController {
     } else {
       throw new ForbiddenException();
     }
+  }
+
+  @ApiOperation({ summary: '유저 로그아웃' })
+  @ApiResponse({
+    status: 201,
+  })
+  @Post('logout')
+  async logout(@Response() res) {
+    res.clearCookie('early_auth', options(false));
+    return res.send('ok');
   }
 }

@@ -1,3 +1,5 @@
+// 요거로 passport session에 집어넣음. 단, 유저 토큰은 jwt를 활용해서 사용
+
 import { Injectable } from '@nestjs/common';
 import { PassportSerializer } from '@nestjs/passport';
 import { InjectRepository } from '@nestjs/typeorm';
