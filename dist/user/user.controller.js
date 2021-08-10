@@ -40,13 +40,14 @@ let UserController = class UserController {
         this.authService = authService;
         this.userService = userService;
     }
+    async getMe(req) {
+        const user = this.userService.findOne(req.user.email);
+        return user;
+    }
     async login(req, res) {
         const token = await this.authService.login(req.user);
         await res.cookie('early_auth', token, options(true));
         return res.status(200).send(req.user);
-    }
-    getMe(req) {
-        return req.user;
     }
     async register(data) {
         const user = await this.userService.findOne(data.email);
@@ -68,6 +69,21 @@ let UserController = class UserController {
 };
 __decorate([
     swagger_1.ApiCookieAuth('early_auth'),
+    swagger_1.ApiOperation({ summary: '유저 정보 획득' }),
+    swagger_1.ApiResponse({
+        status: 201,
+        type: User_entities_1.User,
+        description: '유저의 정보',
+    }),
+    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
+    common_1.Get(),
+    __param(0, common_1.Request()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "getMe", null);
+__decorate([
+    swagger_1.ApiCookieAuth('early_auth'),
     swagger_1.ApiBody({ type: UserSignInDto_1.UserSignInDto }),
     swagger_1.ApiOperation({ summary: '유저 로그인' }),
     swagger_1.ApiResponse({
@@ -81,21 +97,6 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "login", null);
-__decorate([
-    swagger_1.ApiCookieAuth('early_auth'),
-    swagger_1.ApiOperation({ summary: '유저 정보 획득' }),
-    swagger_1.ApiResponse({
-        status: 201,
-        type: User_entities_1.User,
-        description: '유저의 정보',
-    }),
-    common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
-    common_1.Get(),
-    __param(0, common_1.Request()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", void 0)
-], UserController.prototype, "getMe", null);
 __decorate([
     swagger_1.ApiOperation({ summary: '유저 회원가입' }),
     swagger_1.ApiBody({

@@ -8,7 +8,6 @@ const fromAuthCookie = function () {
     if (request && request.cookies) {
       token = request.cookies['early_auth'];
     }
-    console.log(request.cookies);
     return token;
   };
 };

@@ -51,6 +51,21 @@ export class UserController {
   ) {}
 
   @ApiCookieAuth('early_auth')
+  @ApiOperation({ summary: '유저 정보 획득' })
+  @ApiResponse({
+    status: 201,
+    type: User,
+    description: '유저의 정보',
+  })
+  @UseGuards(JwtAuthGuard)
+  @Get()
+  async getMe(@Request() req) {
+    const user = this.userService.findOne(req.user.email);
+
+    return user;
+  }
+
+  @ApiCookieAuth('early_auth')
   @ApiBody({ type: UserSignInDto })
   @ApiOperation({ summary: '유저 로그인' })
   @ApiResponse({
@@ -63,19 +78,6 @@ export class UserController {
     const token = await this.authService.login(req.user);
     await res.cookie('early_auth', token, options(true));
     return res.status(200).send(req.user);
-  }
-
-  @ApiCookieAuth('early_auth')
-  @ApiOperation({ summary: '유저 정보 획득' })
-  @ApiResponse({
-    status: 201,
-    type: User,
-    description: '유저의 정보',
-  })
-  @UseGuards(JwtAuthGuard)
-  @Get()
-  getMe(@Request() req) {
-    return req.user;
   }
 
   @ApiOperation({ summary: '유저 회원가입' })
