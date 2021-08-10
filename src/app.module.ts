@@ -9,6 +9,7 @@ import { CanvasDividedOrder } from './canvas/entities/CanvasDividedOrder.entitie
 import { CanvasSingleOrder } from './canvas/entities/CanvasSingleOrder.entities';
 import { AdminModule } from './admin/admin.module';
 import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { UserModule } from './user/user.module';
     CanvasModule,
     AdminModule,
     UserModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],
