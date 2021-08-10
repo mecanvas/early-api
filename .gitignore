@@ -37,3 +37,6 @@ early
 
 # EC2
 early21.pem
+
+# 임시
+dist/
