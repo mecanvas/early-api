@@ -40,7 +40,7 @@ export class UserSignUpDto {
     example: '01026299315',
     description: '연락 가능한 핸드폰 번호',
   })
-  public phone: number;
+  public phone: string;
 
   @IsString()
   @IsNotEmpty()

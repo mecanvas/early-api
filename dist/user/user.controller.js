@@ -18,20 +18,45 @@ const swagger_1 = require("@nestjs/swagger");
 const auth_service_1 = require("../auth/auth.service");
 const jwt_auth_guard_1 = require("../auth/jwt.auth.guard");
 const local_auth_guard_1 = require("../auth/local.auth.guard");
+const UserSignInDto_1 = require("./dto/UserSignInDto");
+const UserSingUpDto_1 = require("./dto/UserSingUpDto");
+const User_entities_1 = require("./entities/User.entities");
+const user_service_1 = require("./user.service");
 let UserController = class UserController {
-    constructor(authService) {
+    constructor(authService, userService) {
         this.authService = authService;
+        this.userService = userService;
     }
     async login(req, res) {
-        const token = await (await this.authService.login(req.user)).access_token;
+        const token = await this.authService.login(req.user);
         await res.cookie('early_auth', token);
         return req.user;
     }
     getMe(req) {
         return req.user;
     }
+    async register(data) {
+        const user = await this.userService.findOne(data.email);
+        if (user) {
+            throw new common_1.ForbiddenException();
+        }
+        const result = this.userService.userRegister(data);
+        if (result) {
+            return 'ok';
+        }
+        else {
+            throw new common_1.ForbiddenException();
+        }
+    }
 };
 __decorate([
+    swagger_1.ApiCookieAuth('early_auth'),
+    swagger_1.ApiBody({ type: UserSignInDto_1.UserSignInDto }),
+    swagger_1.ApiOperation({ summary: '유저 로그인' }),
+    swagger_1.ApiResponse({
+        status: 201,
+        description: 'early_auth 이름의 쿠키 제공',
+    }),
     common_1.UseGuards(local_auth_guard_1.LocalAuthGuard),
     common_1.Post('login'),
     __param(0, common_1.Request()), __param(1, common_1.Res()),
@@ -40,6 +65,13 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "login", null);
 __decorate([
+    swagger_1.ApiCookieAuth('early_auth'),
+    swagger_1.ApiOperation({ summary: '유저 정보 획득' }),
+    swagger_1.ApiResponse({
+        status: 201,
+        type: User_entities_1.User,
+        description: '유저의 정보',
+    }),
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get(),
     __param(0, common_1.Request()),
@@ -47,10 +79,25 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", void 0)
 ], UserController.prototype, "getMe", null);
+__decorate([
+    swagger_1.ApiOperation({ summary: '유저 회원가입' }),
+    swagger_1.ApiBody({
+        type: UserSingUpDto_1.UserSignUpDto,
+    }),
+    swagger_1.ApiResponse({
+        status: 201,
+    }),
+    common_1.Post('register'),
+    __param(0, common_1.Body()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [UserSingUpDto_1.UserSignUpDto]),
+    __metadata("design:returntype", Promise)
+], UserController.prototype, "register", null);
 UserController = __decorate([
     swagger_1.ApiTags('유저 관련'),
     common_1.Controller('auth'),
-    __metadata("design:paramtypes", [auth_service_1.AuthService])
+    __metadata("design:paramtypes", [auth_service_1.AuthService,
+        user_service_1.UserService])
 ], UserController);
 exports.UserController = UserController;
 //# sourceMappingURL=user.controller.js.map

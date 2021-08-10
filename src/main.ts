@@ -3,6 +3,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 import { AppModule } from './app.module';
 import { HttpExceptionFilter } from './filter/http.exception.filter';
 import * as cookieParser from 'cookie-parser';
+import * as passport from 'passport';
 
 const { PORT } = process.env;
 
@@ -19,6 +20,9 @@ async function bootstrap() {
   SwaggerModule.setup('api', app, document);
 
   app.use(cookieParser());
+
+  app.use(passport.initialize());
+  app.use(passport.session());
 
   await app.listen(PORT || 3000);
   console.log('server is running', `http://localhost:${PORT || 3000}`);

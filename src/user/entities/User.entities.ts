@@ -6,7 +6,7 @@ import {
   PrimaryGeneratedColumn,
 } from 'typeorm';
 
-@Entity({ schema: 'early-api', name: 'User' })
+@Entity({ schema: 'early-api', name: 'users' })
 export class User {
   @PrimaryGeneratedColumn({ type: 'int', name: 'id' })
   @ApiProperty()
@@ -16,11 +16,11 @@ export class User {
   @ApiProperty()
   email: string;
 
-  @Column('varchar', { name: 'password' })
+  @Column('varchar', { name: 'password', length: 100 })
   @ApiProperty()
   password: string;
 
-  @Column('int', { name: 'role' })
+  @Column('int', { name: 'role', default: 0 })
   @ApiProperty({
     description: '0 = 일반 유저, 1 = 어드민 ',
   })
