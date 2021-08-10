@@ -18,8 +18,12 @@ const typeorm_1 = require("@nestjs/typeorm");
 const typeorm_2 = require("typeorm");
 const User_entities_1 = require("./entities/User.entities");
 let UserService = class UserService {
-    constructor(UserRepository) {
-        this.UserRepository = UserRepository;
+    constructor(userRepository) {
+        this.userRepository = userRepository;
+    }
+    async findOne(email) {
+        const user = await this.userRepository.findOne({ where: { email } });
+        return user;
     }
 };
 UserService = __decorate([

@@ -22,29 +22,30 @@ let UserController = class UserController {
     constructor(authService) {
         this.authService = authService;
     }
-    async login(req) {
-        return this.authService.login(req.user);
+    async login(req, res) {
+        const token = await (await this.authService.login(req.user)).access_token;
+        await res.cookie('early_auth', token);
+        return req.user;
     }
-    async getMe(req) {
+    getMe(req) {
         return req.user;
     }
 };
 __decorate([
-    common_1.Get(),
     common_1.UseGuards(local_auth_guard_1.LocalAuthGuard),
     common_1.Post('login'),
-    __param(0, common_1.Req()),
+    __param(0, common_1.Request()), __param(1, common_1.Res()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
+    __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", Promise)
 ], UserController.prototype, "login", null);
 __decorate([
     common_1.UseGuards(jwt_auth_guard_1.JwtAuthGuard),
     common_1.Get(),
-    __param(0, common_1.Req()),
+    __param(0, common_1.Request()),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
+    __metadata("design:returntype", void 0)
 ], UserController.prototype, "getMe", null);
 UserController = __decorate([
     swagger_1.ApiTags('유저 관련'),

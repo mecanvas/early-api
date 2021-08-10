@@ -1,4 +1,4 @@
-import { Controller, Post, Req, UseGuards, Get } from '@nestjs/common';
+import { Controller, Post, Request, UseGuards, Get, Res } from '@nestjs/common';
 import { ApiCookieAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/jwt.auth.guard';
@@ -9,16 +9,17 @@ import { LocalAuthGuard } from 'src/auth/local.auth.guard';
 export class UserController {
   constructor(private authService: AuthService) {}
 
-  @Get()
   @UseGuards(LocalAuthGuard)
   @Post('login')
-  async login(@Req() req) {
-    return this.authService.login(req.user);
+  async login(@Request() req, @Res() res) {
+    const token = await (await this.authService.login(req.user)).access_token;
+    await res.cookie('early_auth', token);
+    return req.user;
   }
 
   @UseGuards(JwtAuthGuard)
   @Get()
-  async getMe(@Req() req) {
+  getMe(@Request() req) {
     return req.user;
   }
 }

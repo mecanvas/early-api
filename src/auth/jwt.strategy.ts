@@ -1,16 +1,24 @@
-import { ExtractJwt, Strategy } from 'passport-jwt';
+import { Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 
-const { JWT_KEY } = process.env;
+const fromAuthCookie = function () {
+  return function (request) {
+    let token = null;
+    if (request && request.cookies) {
+      token = request.cookies['early_auth'];
+    }
+    return token;
+  };
+};
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor() {
     super({
-      jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+      jwtFromRequest: fromAuthCookie(),
       ignoreExpiration: false,
-      secretOrKey: JWT_KEY,
+      secretOrKey: process.env.JWT_KEY,
     });
   }
 

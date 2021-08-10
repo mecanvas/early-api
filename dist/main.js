@@ -4,6 +4,7 @@ const core_1 = require("@nestjs/core");
 const swagger_1 = require("@nestjs/swagger");
 const app_module_1 = require("./app.module");
 const http_exception_filter_1 = require("./filter/http.exception.filter");
+const cookieParser = require("cookie-parser");
 const { PORT } = process.env;
 async function bootstrap() {
     const config = new swagger_1.DocumentBuilder()
@@ -15,6 +16,7 @@ async function bootstrap() {
     app.useGlobalFilters(new http_exception_filter_1.HttpExceptionFilter());
     const document = swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, document);
+    app.use(cookieParser());
     await app.listen(PORT || 3000);
     console.log('server is running', `http://localhost:${PORT || 3000}`);
 }

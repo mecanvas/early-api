@@ -29,6 +29,7 @@ AppModule = __decorate([
         imports: [
             config_1.ConfigModule.forRoot({
                 envFilePath: '.env',
+                isGlobal: true,
             }),
             typeorm_1.TypeOrmModule.forRoot({
                 type: 'mysql',
@@ -46,8 +47,8 @@ AppModule = __decorate([
             }),
             canvas_module_1.CanvasModule,
             admin_module_1.AdminModule,
-            user_module_1.UserModule,
             auth_module_1.AuthModule,
+            user_module_1.UserModule,
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
