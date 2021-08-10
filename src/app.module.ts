@@ -8,11 +8,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { CanvasDividedOrder } from './canvas/entities/CanvasDividedOrder.entities';
 import { CanvasSingleOrder } from './canvas/entities/CanvasSingleOrder.entities';
 import { AdminModule } from './admin/admin.module';
+import { UserModule } from './user/user.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       envFilePath: '.env',
+      isGlobal: true,
     }),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -30,6 +33,8 @@ import { AdminModule } from './admin/admin.module';
     }),
     CanvasModule,
     AdminModule,
+    AuthModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
