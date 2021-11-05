@@ -6,6 +6,7 @@ export declare class CanvasSingleOrder {
     username: string;
     phone: string;
     orderRoute: number;
+    scaleType: number;
     originImgUrl: string;
     paperNames: string[];
     canvasFrameUrls: string[];

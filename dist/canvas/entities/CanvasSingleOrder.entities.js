@@ -50,6 +50,11 @@ __decorate([
     __metadata("design:type", Number)
 ], CanvasSingleOrder.prototype, "orderRoute", void 0);
 __decorate([
+    typeorm_1.Column('varchar', { name: 'scaleType' }),
+    swagger_1.ApiProperty(),
+    __metadata("design:type", Number)
+], CanvasSingleOrder.prototype, "scaleType", void 0);
+__decorate([
     typeorm_1.Column('mediumtext', { name: 'originImgUrl' }),
     swagger_1.ApiProperty(),
     __metadata("design:type", String)

@@ -45,6 +45,15 @@ __decorate([
     class_validator_1.IsNumber(),
     class_validator_1.IsNotEmpty(),
     swagger_1.ApiProperty({
+        example: '1 = 기본 2= 배경 3= 좌우반전',
+        description: '옆면 스케일 정보',
+    }),
+    __metadata("design:type", Number)
+], CanvasSaveRequestDto.prototype, "scaleType", void 0);
+__decorate([
+    class_validator_1.IsNumber(),
+    class_validator_1.IsNotEmpty(),
+    swagger_1.ApiProperty({
         example: '1 = 쿠팡, 2= 네이버, 3= 아이디어스',
         description: '주문 경로',
     }),

@@ -73,7 +73,7 @@ let CanvasService = class CanvasService {
         return '성공적으로 저장되었습니다!';
     }
     async sendToSingleCanvas(files, data) {
-        const { phone, paperNames, username, originImgUrl, orderRoute, type } = data;
+        const { phone, paperNames, username, originImgUrl, orderRoute, type, scaleType, } = data;
         const canvasFrameUrls = files.location;
         const paperNameArr = paperNames.split(',');
         await this.canvasSingleOrderRepository.save({
@@ -81,6 +81,7 @@ let CanvasService = class CanvasService {
             phone,
             type: +type,
             orderRoute: +orderRoute,
+            scaleType: +scaleType,
             originImgUrl,
             paperNames: paperNameArr,
             canvasFrameUrls,

@@ -29,6 +29,14 @@ export class CanvasSaveRequestDto {
   @IsNumber()
   @IsNotEmpty()
   @ApiProperty({
+    example: '1 = 기본 2= 배경 3= 좌우반전',
+    description: '옆면 스케일 정보',
+  })
+  public scaleType: number;
+
+  @IsNumber()
+  @IsNotEmpty()
+  @ApiProperty({
     example: '1 = 쿠팡, 2= 네이버, 3= 아이디어스',
     description: '주문 경로',
   })

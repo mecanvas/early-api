@@ -36,6 +36,10 @@ export class CanvasSingleOrder {
   @ApiProperty()
   orderRoute: number;
 
+  @Column('varchar', { name: 'scaleType' })
+  @ApiProperty()
+  scaleType: number; // 1 = 흰색 2 = 배경 3 = 좌우반전
+
   @Column('mediumtext', { name: 'originImgUrl' })
   @ApiProperty()
   originImgUrl: string;

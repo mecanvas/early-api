@@ -80,8 +80,15 @@ export class CanvasService {
   }
 
   async sendToSingleCanvas(files: any, data: CanvasSaveRequestDto) {
-    const { phone, paperNames, username, originImgUrl, orderRoute, type } =
-      data;
+    const {
+      phone,
+      paperNames,
+      username,
+      originImgUrl,
+      orderRoute,
+      type,
+      scaleType,
+    } = data;
     const canvasFrameUrls = files.location;
     const paperNameArr = paperNames.split(',');
 
@@ -90,6 +97,7 @@ export class CanvasService {
       phone,
       type: +type,
       orderRoute: +orderRoute,
+      scaleType: +scaleType,
       originImgUrl,
       paperNames: paperNameArr,
       canvasFrameUrls,
