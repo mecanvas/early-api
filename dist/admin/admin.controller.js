@@ -152,6 +152,10 @@ __decorate([
                             type: 'string',
                             example: '01026299315',
                         },
+                        scaleType: {
+                            type: 'number',
+                            example: '1 = 기본, 2 = 배경, 3 = 좌우반전',
+                        },
                         orderRoute: {
                             type: 'string',
                             example: '네이버',

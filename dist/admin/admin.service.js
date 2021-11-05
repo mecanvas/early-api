@@ -62,6 +62,7 @@ let AdminOrderService = class AdminOrderService {
                 'createdAt',
                 'username',
                 'phone',
+                'scaleType',
                 'orderRoute',
                 'originImgUrl',
                 'paperNames',

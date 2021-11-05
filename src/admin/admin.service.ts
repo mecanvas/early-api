@@ -56,6 +56,7 @@ export class AdminOrderService {
         'createdAt',
         'username',
         'phone',
+        'scaleType',
         'orderRoute',
         'originImgUrl',
         'paperNames',
